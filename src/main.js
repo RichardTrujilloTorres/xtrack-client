@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import filters from './filters'
 
 import popper from 'popper.js'
 import jquery from 'jquery'

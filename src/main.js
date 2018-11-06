@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import filters from './filters'
 
+// TODO find a better way to do this
 import popper from 'popper.js'
 import jquery from 'jquery'
 import bootstrap from 'bootstrap/dist/js/bootstrap'

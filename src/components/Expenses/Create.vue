@@ -1,9 +1,11 @@
 <template>
   <div>
     <div class="card">
-        <span class="alert-danger" v-if="errors">
-          // shit
-      </span>
+        <div v-if="errors.length" class="alert alert-danger" role="alert">
+            <ul>
+                <li v-for="error in errors">{{ error }}</li>
+            </ul>
+        </div>
 
         <form @submit.prevent="submit">
 
@@ -23,14 +25,15 @@
 </template>
 
 <script>
-    const API_URL = 'http://localhost:8000/api'
-    import axios from 'axios'
+    import api from '@/api'
+    import formMixins from "../../utils/formMixins";
 
-export default {
+    export default {
   name: 'Create',
+    mixins: [formMixins],
     data() {
       return {
-          errors: null,
+          errors: [],
           expense: {
               denomination: null,
               description: null
@@ -39,18 +42,21 @@ export default {
     },
     methods: {
       submit() {
-          // validation either on edition or right before submission
-          axios.post(`${API_URL}/expenses`, this.expense)
+          this.validate(this.expense, this.errors)
+          if (this.errors.length) {
+              return
+          }
+
+          api.post('/expenses', this.expense)
               .then(res => {
-                  console.log(res)
-                  // this.expense = res.data.data.expenses
+                  this.$swal('Success', 'Expense successfully created', 'success')
+                  this.$router.push('/expenses')
               })
               .catch(res => {
-                  // this.errors = res.data.errors
                   console.log(res)
+                  this.$swal('Error', 'Could not create expense', 'error')
               })
-
-      },
+      }
     }
 }
 </script>

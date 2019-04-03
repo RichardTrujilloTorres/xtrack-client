@@ -1,8 +1,18 @@
 {
-  "language": "italiano",
+  "language": {
+    "name": "Lingua",
+    "english": "Inglese",
+    "italian": "Italiano"
+  },
+  "app": {
+    "home": "Principale",
+    "about": "Circa"
+  },
   "expenses": {
     "name": "Spese",
+    "search": "Cerca",
     "listing": "Elenco",
-    "create": "Aggiungi"
+    "create": "Aggiungi",
+    "statistics": "Statistiche"
   }
 }

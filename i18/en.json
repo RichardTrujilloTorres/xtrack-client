@@ -1,8 +1,18 @@
 {
-  "language": "english",
+  "language": {
+    "name": "Language",
+    "english": "English",
+    "italian": "Italian"
+  },
+  "app": {
+    "home": "Home",
+    "about": "About"
+  },
   "expenses": {
     "name": "Expenses",
+    "search": "Search",
     "listing": "Listing",
-    "create": "Create"
+    "create": "Create",
+    "statistics": "Statistics"
   }
 }

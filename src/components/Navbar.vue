@@ -15,18 +15,33 @@
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Expenses
+              {{ $t('expenses.name') }}
             </a>
 
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
 
-              <router-link to="/expenses" class="dropdown-item">Listing</router-link>
-              <router-link to="/expenses/create" class="dropdown-item">Add</router-link>
+              <router-link to="/expenses" class="dropdown-item">{{ $t('expenses.listing') }}</router-link>
+              <router-link to="/expenses/create" class="dropdown-item">{{ $t('expenses.create') }}</router-link>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">Statistics</a>
             </div>
           </li>
+
+          <!-- language -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#"
+               id="language-dropdown" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Language
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="language-dropdown">
+              <a class="dropdown-item" href="#" @click="switchLanguage(languages.EN)">English</a>
+              <a class="dropdown-item" href="#" @click="switchLanguage(languages.IT)">Italian</a>
+            </div>
+          </li>
+
           <!--
           <li class="nav-item">
             <a class="nav-link disabled" href="#">Disabled</a>
@@ -43,8 +58,20 @@
 </template>
 
 <script>
+  import LANGUAGES from '../../i18/constants';
+
 export default {
   name: 'Navbar',
+  computed: {
+      languages() {
+        return LANGUAGES
+      }
+  },
+  methods: {
+    switchLanguage(language) {
+      this.$i18n.locale = language
+    }
+  }
 }
 </script>
 

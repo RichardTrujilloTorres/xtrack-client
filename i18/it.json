@@ -1,3 +1,8 @@
 {
-  "language": "italiano"
+  "language": "italiano",
+  "expenses": {
+    "name": "Spese",
+    "listing": "Elenco",
+    "create": "Aggiungi"
+  }
 }

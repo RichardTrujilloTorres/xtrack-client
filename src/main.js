@@ -32,6 +32,15 @@ Vue.use(VueForm, {
   formControlFeedback: {
     valid: 'is-valid',
     invalid: 'is-invalid'
+  },
+  validators: {
+    'multi-select-validator': (value, attrValue, vnode) => {
+      if (!value) {
+        return false
+      }
+
+      return true
+    }
   }
 })
 Vue.use(Multiselect)

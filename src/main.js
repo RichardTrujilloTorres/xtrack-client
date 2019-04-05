@@ -14,6 +14,7 @@ import bootstrapCss from 'bootstrap/dist/css/bootstrap.css'
 const _ = require('lodash')
 
 import VueSweetalert2 from 'vue-sweetalert2';
+import VueForm from 'vue-form';
 import VueI18n from 'vue-i18n';
 
 
@@ -21,6 +22,16 @@ Vue.config.productionTip = false
 
 Vue.use(VueSweetalert2)
 Vue.use(VueI18n)
+Vue.use(VueForm, {
+  inputClasses: {
+    valid: 'is-valid',
+    invalid: 'is-invalid'
+  },
+  formControlFeedback: {
+    valid: 'is-valid',
+    invalid: 'is-invalid'
+  }
+})
 
 
 // Internalization

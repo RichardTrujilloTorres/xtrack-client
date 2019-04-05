@@ -1,25 +1,49 @@
 <template>
   <div>
     <div class="card">
-        <div v-if="errors.length" class="alert alert-danger" role="alert">
-            <ul>
-                <li v-for="error in errors">{{ error }}</li>
-            </ul>
-        </div>
+        <error :errors="errors"></error>
 
-        <form @submit.prevent="submit">
+            <vue-form :state="formstate" @submit.prevent="submit">
 
-          <div class="card-header">
-              <input v-model="expense.denomination" class="form-control" />
-          </div>
+                <div class="card-header">
+                    Expense Creation
+                </div>
 
-          <div class="card card-body">
-              <textarea v-model="expense.description" class="form-control"></textarea>
-          </div>
+                <!-- denomination -->
+                <div class="card card-body">
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <validate tag="label" class="form-group required-field" >
+                                <label>Denomination *</label>
+                                <input class="form-control" v-model="model.denomination" type="text" name="denomination" required />
 
-            <button class="btn btn-primary" type="submit">Save</button>
-            <button class="btn btn-default" type="reset">Reset</button>
-        </form>
+                                <field-messages  show="$touched || $submitted" class="form-control-feedback">
+                                    <div slot="required">Denomination required</div>
+                                </field-messages>
+                            </validate>
+
+                        </div>
+                    </div>
+
+                    <!-- description -->
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <validate tag="label" class="form-group required-field" >
+                                <span>Description</span>
+                                <input class="form-control" v-model="model.description" name="description" type="text" required />
+
+                                <field-messages show="$touched || $submitted" class="form-control-feedback">
+                                    <div slot="required">Description is required</div>
+                                    <div slot="description">Invalid description</div>
+                                </field-messages>
+                            </validate>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button class="btn btn-primary" type="submit">Save</button>
+            </vue-form>
     </div>
   </div>
 </template>
@@ -27,12 +51,22 @@
 <script>
     import api from '@/api'
     import formMixins from "../../utils/formMixins";
+    import Error from "@/components/Base/Error";
+    import Expense from '@/api/expense'
+
 
     export default {
   name: 'Create',
+    components: {Error},
     mixins: [formMixins],
     data() {
       return {
+          resource: Expense,
+          formstate: {},
+          model: {
+              denomination: '',
+              description: '...'
+          },
           errors: [],
           expense: {
               denomination: null,
@@ -41,21 +75,27 @@
       }
     },
     methods: {
+      onSuccess(res) {
+          this.$swal('Success', 'Expense successfully created', 'success')
+
+          this.$router.push('/expenses')
+      },
+          onFailure(res) {
+              this.$swal('Error', 'Could not create expense', 'error')
+
+              console.log(res)
+          },
       submit() {
-          this.validate(this.expense, this.errors)
-          if (this.errors.length) {
-              return
+          if (this.formstate.$invalid) {
+              this.$swal('Error', 'Please correct the errors before submitting', 'error')
+              return;
           }
 
-          api.post('/expenses', this.expense)
-              .then(res => {
-                  this.$swal('Success', 'Expense successfully created', 'success')
-                  this.$router.push('/expenses')
-              })
-              .catch(res => {
-                  console.log(res)
-                  this.$swal('Error', 'Could not create expense', 'error')
-              })
+
+          this.resource.store(this.model)
+              .then(res => this.onSuccess(res))
+              .catch(res => this.onFailure(res))
+
       }
     }
 }

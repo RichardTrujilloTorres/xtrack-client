@@ -100,22 +100,11 @@ export default {
     }
   },
   methods: {
-    onSuccess(res) {
-      this.$swal('Success', 'Expense successfully created', 'success')
-
-      this.$router.push('/expenses')
-    },
-    onFailure(res) {
-      this.$swal('Error', 'Could not create expense', 'error')
-
-      console.log(res)
-    },
     submit() {
       if (this.formstate.$invalid) {
-        this.$swal('Error', 'Please correct the errors before submitting', 'error')
+        this.$swal('Error', this.$i18n.t('form.toCorrect'), 'error')
         return
       }
-
 
       this.resource.store(this.model)
         .then(res => this.onSuccess(res))

@@ -25,5 +25,16 @@
   "fields": {
     "required": "Campo richiesto",
     "invalid": "Campo non valido"
+  },
+  "status": {
+    "success":  "Successo",
+    "error": "Errore"
+  },
+  "operation": {
+    "success":  "Operazione conclusa con successo",
+    "error": "Errore nel tentativo di compiere l'operazione"
+  },
+  "form": {
+    "toCorrect": "Prego correggere gli errori prima"
   }
 }

@@ -25,5 +25,16 @@
   "fields": {
     "required": "Field is required",
     "invalid": "Field is not valid"
+  },
+  "status": {
+    "success":  "Success",
+    "error": "Error"
+  },
+  "operation": {
+    "success":  "Operation successfully completed",
+    "error": "Error while attempting to perform the operation"
+  },
+  "form": {
+    "toCorrect": "Please correct the errors before submitting"
   }
 }

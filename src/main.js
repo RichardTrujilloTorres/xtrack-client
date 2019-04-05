@@ -16,6 +16,8 @@ const _ = require('lodash')
 import VueSweetalert2 from 'vue-sweetalert2';
 import VueForm from 'vue-form';
 import VueI18n from 'vue-i18n';
+import Multiselect from 'vue-multiselect';
+import multiselectCss from 'vue-multiselect/dist/vue-multiselect.min.css';
 
 
 Vue.config.productionTip = false
@@ -32,6 +34,7 @@ Vue.use(VueForm, {
     invalid: 'is-invalid'
   }
 })
+Vue.use(Multiselect)
 
 
 // Internalization

@@ -13,6 +13,17 @@
     "search": "Search",
     "listing": "Listing",
     "create": "Create",
-    "statistics": "Statistics"
+    "statistics": "Statistics",
+    "denomination": "Denomination",
+    "description": "Description"
+  },
+  "actions": {
+    "save": "Save",
+    "update": "Update",
+    "delete": "Delete"
+  },
+  "fields": {
+    "required": "Field is required",
+    "invalid": "Field is not valid"
   }
 }

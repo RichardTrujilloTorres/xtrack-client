@@ -13,6 +13,17 @@
     "search": "Cerca",
     "listing": "Elenco",
     "create": "Aggiungi",
-    "statistics": "Statistiche"
+    "statistics": "Statistiche",
+    "denomination": "Denominazione",
+    "description": "Descrizione"
+  },
+  "actions": {
+    "save": "Salva",
+    "update": "Aggiorna",
+    "delete": "Cancella"
+  },
+  "fields": {
+    "required": "Campo richiesto",
+    "invalid": "Campo non valido"
   }
 }

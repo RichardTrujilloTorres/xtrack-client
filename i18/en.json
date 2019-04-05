@@ -15,7 +15,8 @@
     "create": "Create",
     "statistics": "Statistics",
     "denomination": "Denomination",
-    "description": "Description"
+    "description": "Description",
+    "category": "Category"
   },
   "actions": {
     "save": "Save",
@@ -36,5 +37,8 @@
   },
   "form": {
     "toCorrect": "Please correct the errors before submitting"
+  },
+  "requests": {
+    "select": "Please, select"
   }
 }

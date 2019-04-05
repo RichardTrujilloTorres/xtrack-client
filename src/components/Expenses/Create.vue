@@ -68,7 +68,42 @@
               </validate>
             </div>
           </div>
+
+          <!-- category -->
+          <div class="form-row">
+            <div class="col-md-4 mb-3">
+              <validate
+                      tag="label"
+                      class="form-group required-field"
+              >
+                <label class="type__label">{{ $t('expenses.category') }}</label>
+                <multiselect
+                        v-model="model.category"
+                             :options="categories"
+                             :searchable="false"
+                             :close-on-select="true"
+                             :show-labels="false"
+                             :placeholder="$t('requests.select', { selection: 'category' })">
+                </multiselect>
+
+                <field-messages
+                        show="$touched || $submitted"
+                        class="form-control-feedback"
+                >
+                  <div slot="required">
+                    {{ $t('fields.required') }}
+                  </div>
+                  <div slot="category">
+                    {{ $t('fields.invalid') }}
+                  </div>
+                </field-messages>
+              </validate>
+            </div>
+          </div>
         </div>
+
+
+
 
         <button
           class="btn btn-primary"
@@ -84,10 +119,12 @@
 <script>
 import formMixins from "../../utils/formMixins";
 import Expense from '@/api/expense'
+import Multiselect from 'vue-multiselect';
 
 
 export default {
   name: 'Create',
+  components: {Multiselect},
   mixins: [formMixins],
   data() {
     return {
@@ -95,8 +132,16 @@ export default {
       formstate: {},
       model: {
         denomination: '',
-        description: '...'
-      }
+        description: '...',
+        category: null
+      },
+      // TODO BE based
+      categories: [
+        'groceries',
+        'medicines',
+        'transportation',
+        'other'
+      ],
     }
   },
   methods: {
@@ -113,4 +158,19 @@ export default {
   }
 }
 </script>
+<style>
+  .multiselect {
+    width: fit-content !important;
+  }
+
+  .multiselect__content-wrapper {
+    width: fit-content !important;
+  }
+
+  /*
+  .multiselect__element {
+    width: fit-content !important;
+  }
+  */
+</style>
 

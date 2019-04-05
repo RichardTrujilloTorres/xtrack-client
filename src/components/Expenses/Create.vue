@@ -78,12 +78,18 @@
               >
                 <label class="type__label">{{ $t('expenses.category') }}</label>
                 <multiselect
+                        multi-select-validator
+                        name="category"
                         v-model="model.category"
-                             :options="categories"
-                             :searchable="false"
-                             :close-on-select="true"
-                             :show-labels="false"
-                             :placeholder="$t('requests.select', { selection: 'category' })">
+                         :options="categories"
+                         :searchable="false"
+                         :close-on-select="true"
+                         :show-labels="true"
+                         :placeholder="$t('requests.select', { selection: 'category' })"
+                        :deselectLabel="''"
+                        :selectedLabel="''"
+                        required
+                >
                 </multiselect>
 
                 <field-messages

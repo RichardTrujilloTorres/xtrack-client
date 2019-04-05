@@ -1,31 +1,40 @@
+
 let formMixins = {
-    methods: {
-        validate: (expense, errors) => {
-            errors.splice(0, errors.length)
-            if (!expense.description) {
-                errors.push('Description required')
-            }
+  data: () => ({
+    errors: []
+  }),
+  methods: {
+    validate: (expense, errors) => {
+      // errors.splice(0, errors.length)
+      errors.splice(0, 1)
+      if (!expense.description) {
+        errors.push('Description required')
+      }
 
-            if (!expense.denomination) {
-                errors.push('Denomination required')
-            }
-        },
-        onSuccess(res) {
-            this.$swal('Success', 'Operation successfully completed', 'success')
+      if (!expense.denomination) {
+        errors.push('Denomination required')
+      }
+    },
+    onSuccess(res) {
+      this.$swal(
+        this.$i18n.t('status.success'),
+        this.$i18n.t('operation.success'),
+        'success'
+      )
 
-            this.$router.push('/')
-        },
-        onFailure(res) {
-            let message = 'Error while attempting to perform the operation'
-            if (res.hasOwnProperty('message')) {
-                message = res.message
-            }
+      this.$router.push('/')
+    },
+    onFailure(res) {
+      let message = this.$i18n.t('operation.error')
+      if (res.hasOwnProperty('message')) {
+        message = res.message
+      }
 
-            this.$swal('Error', message, 'error')
-            console.log(res)
-        },
+      this.$swal('Error', message, 'error')
+      console.log(res)
+    },
 
-    }
+  }
 }
 
 export default formMixins

@@ -21,7 +21,9 @@
   "actions": {
     "save": "Salva",
     "update": "Aggiorna",
-    "delete": "Cancella"
+    "delete": "Elimina",
+    "confirm": "Conferma",
+    "cancel": "Cancella"
   },
   "fields": {
     "required": "Campo richiesto",
@@ -39,6 +41,6 @@
     "toCorrect": "Prego correggere gli errori prima"
   },
   "requests": {
-    "select": "Prego, selezionare"
+    "select": "Prego, selezionare una opzione"
   }
 }

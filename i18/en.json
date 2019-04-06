@@ -21,7 +21,9 @@
   "actions": {
     "save": "Save",
     "update": "Update",
-    "delete": "Delete"
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   },
   "fields": {
     "required": "Field is required",
@@ -39,6 +41,6 @@
     "toCorrect": "Please correct the errors before submitting"
   },
   "requests": {
-    "select": "Please, select"
+    "select": "Please, select an option"
   }
 }

@@ -20,7 +20,7 @@ class Resource {
      * @returns {Promise<AxiosPromise<any>>}
      */
     async index() {
-        return this.api.get('/')
+        return await this.api.get('/')
     }
 
     /**

@@ -1,8 +1,6 @@
 <template>
   <div>
-    <!-- TODO replace w/ the spinner -->
-    <span v-if="isLoading">... loading</span>
-
+    <clip-loader :loading="isLoading" />
 
     <div
       v-if="!isLoading"
@@ -133,11 +131,12 @@ import formMixins from "../../utils/formMixins";
 import Expense from '@/api/expense'
 import Multiselect from 'vue-multiselect';
 import {mapGetters} from 'vuex';
+import ClipLoader from 'vue-spinner/src/ClipLoader';
 
 
 export default {
   name: 'Create',
-  components: {Multiselect},
+  components: {Multiselect, ClipLoader},
   mixins: [formMixins],
   data() {
     return {
@@ -167,12 +166,7 @@ export default {
   mounted() {
     this.$store.dispatch('getExpense', this.id)
       .then(() => {
-          // wait a bit to test the laoading
-        setTimeout(() => {
-          console.log('waiting')
-          this.isLoading = false
-        }, 3000)
-
+        this.isLoading = false
         this.model = {...this.getExpense}
       })
   },

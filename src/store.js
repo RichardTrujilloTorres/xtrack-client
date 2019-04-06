@@ -10,14 +10,29 @@ const API_URL = 'http://localhost:8000/api'
 export default new Vuex.Store({
   state: {
       expenses: [],
-      expense: Expense
+      expense: null,
+      resource: Expense
   },
   mutations: {
+      // sets the working expense
+      setExpense(state, expense) {
+          state.expense = expense
+      },
       setExpenses(state, expenses) {
           state.expenses = expenses
       }
   },
   actions: {
+      // retrieves the working expense
+      getExpense(context, id) {
+          return this.state.resource.show(id)
+              .then(res => {
+                  context.commit('setExpense', res.data.data)
+              })
+              .catch(res => {
+                  console.log(res)
+              })
+      },
       getExpenses({ commit }) {
           const expenses = this.state.expense.index()
           expenses.then(res => {
@@ -28,41 +43,10 @@ export default new Vuex.Store({
           .catch(res => {
               console.log(res)
           })
-      },
-      // Should not be overused.
-      // Work with the store instead and reload as (and if) needed.
-      getExpenseById({ commit }, id) {
-          const expense = this.state.expense.show(id)
-
-          return expense
-          /*
-          expense.then(res => {
-              // console.log(res.data.data)
-
-              return res.data.data
-          })
-          .catch(res => {
-              console.log(res)
-
-              return null
-          })
-          */
-
-          /*
-          let expense = null
-          axios.get(`${API_URL}/expenses/${id}`)
-              .then(res => {
-                  // commit('setExpenses', res.data.data.expenses.data)
-                  console.log('---------- promise')
-                  console.log( res.data.data.expenses)
-                  expense = res.data.data.expenses
-              })
-              .catch(res => {
-                  console.log(res)
-              })
-
-          return expense
-          */
       }
-  }
+  },
+    getters: {
+      // return the working expense
+      getExpense: (state) => state.expense
+    }
 })

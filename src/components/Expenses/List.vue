@@ -25,6 +25,10 @@
 
         <td>
           <router-link :to="{ name: 'expenses-edit' , params: { id: expense.id }}">Edit</router-link>
+            <delete-confirmation-modal
+                    :callback="removeExpense"
+                    :id="expense.id"
+            ></delete-confirmation-modal>
         </td>
       </tr>
       </tbody>
@@ -35,13 +39,25 @@
 
 <script>
   import {mapState} from 'vuex'
+  import formMixins from "@/utils/formMixins";
+  import DeleteConfirmationModal from '@/components/Base/DeleteConfirmationModal'
+  import Expense from "../../api/expense";
 
 export default {
   name: 'List',
+  components: {DeleteConfirmationModal},
+  mixins: [formMixins],
     mounted() {
       this.$store.dispatch('getExpenses')
         console.log(this.expenses)
     },
+  methods: {
+      removeExpense(id) {
+          this.resource.delete(id)
+              .then(res => this.onSuccess(res))
+              .catch(res => this.onFailure(res))
+      }
+  },
     computed: {
       // Not working:
         // mapState({expenses: state => state.expenses})
@@ -58,6 +74,7 @@ export default {
     },
     data() {
       return {
+        resource: Expense,
         }
     }
 }

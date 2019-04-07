@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import filters from './filters'
+import filters from './utils/filters'
 import messages from '../i18/messages'
 
 // TODO find a better way to do this

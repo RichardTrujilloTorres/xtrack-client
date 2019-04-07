@@ -2,10 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import PageNotFound from './views/PageNotFound.vue'
-import List from '@/components/Expenses/List'
 import Expense from '@/components/Expenses/Expense'
 import Edit from '@/components/Expenses/Edit'
 import Create from '@/components/Expenses/Create'
+import Index from "./components/Expenses/Index";
 
 Vue.use(Router)
 
@@ -16,7 +16,7 @@ export default new Router({
       {
           path: '/expenses',
           name: 'expenses',
-          component: List,
+          component: Index,
       },
       {
           path: '/expenses/create',

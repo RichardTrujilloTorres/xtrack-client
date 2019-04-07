@@ -1,11 +1,11 @@
 <template>
   <div>
-    <button
-      class="btn btn-danger"
-      @click.prevent="showConfirmationModal"
-    >
-      {{ $t('actions.delete') }}
-    </button>
+      <a href="#"
+         @click.prevent="showConfirmationModal"
+         class="text-danger"
+      >
+          <i class="fa fa-trash"></i>
+      </a>
   </div>
 </template>
 

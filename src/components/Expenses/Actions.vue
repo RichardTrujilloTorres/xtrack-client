@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-link :to="{ name: 'expenses-edit' , params: { id: rowData.id }}">
-      Edit
+      <i class="fa fa-edit"></i>
     </router-link>
     <delete-confirmation-modal
       :id="rowData.id"

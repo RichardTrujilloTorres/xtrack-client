@@ -11,6 +11,9 @@ import jquery from 'jquery'
 import bootstrap from 'bootstrap/dist/js/bootstrap'
 import bootstrapCss from 'bootstrap/dist/css/bootstrap.css'
 
+// Icons
+import fontAwesome from 'font-awesome/css/font-awesome.css';
+
 const _ = require('lodash')
 
 import VueSweetalert2 from 'vue-sweetalert2';

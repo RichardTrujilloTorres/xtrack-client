@@ -3,6 +3,7 @@
     <router-link :to="{ name: 'expenses-edit' , params: { id: rowData.id }}">
       <i class="fa fa-edit"></i>
     </router-link>
+    &nbsp;
     <delete-confirmation-modal
       :id="rowData.id"
       :callback="removeExpense"

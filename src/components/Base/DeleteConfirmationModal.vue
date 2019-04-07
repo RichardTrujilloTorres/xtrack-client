@@ -1,12 +1,10 @@
 <template>
-  <div>
       <a href="#"
          @click.prevent="showConfirmationModal"
          class="text-danger"
       >
           <i class="fa fa-trash"></i>
       </a>
-  </div>
 </template>
 
 <script>

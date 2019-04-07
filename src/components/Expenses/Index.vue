@@ -50,7 +50,7 @@ export default {
           name: '__component:actions',
           title: 'actions',
           titleClass: 'center aligned',
-          dataClass: 'center aligned'
+          dataClass: 'right aligned'
         }
       ]
     }

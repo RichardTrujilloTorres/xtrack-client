@@ -8,6 +8,16 @@
     "home": "Home",
     "about": "About"
   },
+  "user": {
+    "name": "User",
+    "email": "Email",
+    "password": "Password"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register"
+  },
   "expenses": {
     "name": "Expenses",
     "search": "Search",
@@ -24,7 +34,8 @@
     "update": "Update",
     "delete": "Delete",
     "confirm": "Confirm",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "submit": "Submit"
   },
   "fields": {
     "required": "Field is required",
@@ -36,7 +47,10 @@
   },
   "operation": {
     "success":  "Operation successfully completed",
-    "error": "Error while attempting to perform the operation"
+    "error": "Error while attempting to perform the operation",
+    "logout": {
+      "success": "Successfully logged out"
+    }
   },
   "form": {
     "toCorrect": "Please correct the errors before submitting"

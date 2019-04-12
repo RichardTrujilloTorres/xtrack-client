@@ -8,6 +8,16 @@
     "home": "Principale",
     "about": "Circa"
   },
+  "user": {
+    "email": "Email",
+    "password": "Password"
+  },
+  "auth": {
+    "name": "Utente",
+    "login": "Accesso",
+    "logout": "Logout",
+    "register": "Registrazione"
+  },
   "expenses": {
     "name": "Spese",
     "search": "Cerca",
@@ -24,7 +34,8 @@
     "update": "Aggiorna",
     "delete": "Elimina",
     "confirm": "Conferma",
-    "cancel": "Cancella"
+    "cancel": "Cancella",
+    "submit": "Invia"
   },
   "fields": {
     "required": "Campo richiesto",
@@ -36,7 +47,10 @@
   },
   "operation": {
     "success":  "Operazione conclusa con successo",
-    "error": "Errore nel tentativo di compiere l'operazione"
+    "error": "Errore nel tentativo di compiere l'operazione",
+    "logout": {
+      "success": "Logout effettuato con successo"
+    }
   },
   "form": {
     "toCorrect": "Prego correggere gli errori prima"

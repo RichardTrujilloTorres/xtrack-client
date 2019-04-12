@@ -22,6 +22,19 @@ import VueI18n from 'vue-i18n';
 import Multiselect from 'vue-multiselect';
 import multiselectCss from 'vue-multiselect/dist/vue-multiselect.min.css';
 
+import {VueAuthenticate} from 'vue-authenticate';
+import VueAxios from 'vue-axios';
+import axios from 'axios';
+
+
+
+
+// Authentication
+Vue.use(VueAxios, axios)
+export const vueAuth = new VueAuthenticate(axios, {
+  baseUrl: 'http:/localhost:8000'
+})
+
 
 Vue.config.productionTip = false
 

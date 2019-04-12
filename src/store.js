@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
 import Expense from "./api/expense";
 
 Vue.use(Vuex)

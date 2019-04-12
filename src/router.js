@@ -6,41 +6,77 @@ import Expense from '@/components/Expenses/Expense'
 import Edit from '@/components/Expenses/Edit'
 import Create from '@/components/Expenses/Create'
 import Index from "./components/Expenses/Index";
+import {vueAuth} from "./main";
+import Login from "./components/Auth/Login";
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
       {
+          path: '/dummy',
+          name: 'dummy',
+          component: Dummy,
+          meta: {
+              requiresAuth: false
+          }
+      },
+      {
+          path: '/login',
+          name: 'login',
+          component: Login,
+          meta: {
+              requiresAuth: false
+          }
+      },
+      {
           path: '/expenses',
           name: 'expenses',
           component: Index,
+          meta: {
+              requiresAuth: true
+          }
       },
       {
           path: '/expenses/create',
           name: 'expenses-create',
           component: Create,
+          meta: {
+              requiresAuth: true
+          }
       },
       {
           path: '/expenses/:id/edit',
           name: 'expenses-edit',
           component: Edit,
+          meta: {
+              requiresAuth: true
+          }
       },
       {
           path: '/expenses/:id',
           name: 'expenses-show',
           component: Expense,
+          meta: {
+              requiresAuth: true
+          }
       },
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+    meta: {
+        requiresAuth: false
+    }
     },
     {
       path: '/about',
       name: 'about',
+        meta: {
+            requiresAuth: false
+        },
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -49,7 +85,23 @@ export default new Router({
       {
           path: '*',
           name: '404',
-          component: PageNotFound
+          component: PageNotFound,
+          meta: {
+              requiresAuth: false
+          }
       },
   ]
 })
+
+// Auth route restriction
+router.beforeEach((to, from, next) => {
+    if (to.meta.requiresAuth && !vueAuth.isAuthenticated()) {
+        next('/login')
+
+        return
+    }
+
+    next()
+})
+
+export default router

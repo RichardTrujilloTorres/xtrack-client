@@ -1,4 +1,6 @@
-import axios from 'axios'
+import axios from 'axios';
+import {vueAuth} from "../main";
+
 
 /**
  * RESTful API resource.
@@ -11,6 +13,19 @@ class Resource {
     constructor(baseURL) {
         this.api = axios.create({
             baseURL: baseURL
+        })
+
+        // configure authentication headers
+        this.api.interceptors.request.use((config) => {
+            if (vueAuth.isAuthenticated()) {
+                config.headers['Authorization'] = [
+                    vueAuth.options.tokenType, vueAuth.getToken()
+                ].join(' ')
+            } else {
+                delete config.headers['Authorization']
+            }
+
+            return config
         })
     }
 

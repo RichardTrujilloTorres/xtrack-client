@@ -4,6 +4,7 @@
     <vuetable
       :ref="elementRef"
       :api-url="apiUrl"
+      :http-options="httpOptions"
       :fields="fields"
       pagination-path=""
       :per-page="10"
@@ -26,6 +27,7 @@ import Vuetable from 'vuetable-2/src/components/Vuetable';
 import VuetablePagination from 'vuetable-2/src/components/VuetablePagination';
 import VuetablePaginationInfo from 'vuetable-2/src/components/VuetablePaginationInfo';
 import datatableCss from '@/datatable.config';
+import {vueAuth} from "../../main";
 
 export default {
   name: 'Datatable',
@@ -54,6 +56,18 @@ export default {
     }
   },
   computed: {
+    httpOptions() {
+      let headers = {
+        headers: {}
+      }
+      if (vueAuth.isAuthenticated()) {
+        headers.headers.Authorization = [
+          vueAuth.options.tokenType, vueAuth.getToken()
+        ].join(' ')
+      }
+
+      return headers
+    }
   },
   methods: {
     onPaginationData(paginationData) {

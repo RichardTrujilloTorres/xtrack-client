@@ -4,8 +4,6 @@ import Expense from "./api/expense";
 
 Vue.use(Vuex)
 
-const API_URL = 'http://localhost:8000/api'
-
 export default new Vuex.Store({
   state: {
       expenses: [],

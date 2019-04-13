@@ -12,7 +12,7 @@
           id="expensesByCategory"
           ref="expensesByCategory"
           style="height: 200px;"
-        />
+        ></div>
 
         <h5 class="card-title">
           By Category
@@ -36,7 +36,7 @@
           id="expensesByMonth"
           ref="expensesByMonth"
           style="height: 300px"
-        />
+        ></div>
 
         <h5 class="card-title">
           By Month
@@ -58,7 +58,7 @@
           id="expensesByDate"
           ref="expensesByDate"
           style="height: 300px"
-        />
+        ></div>
 
         <h5 class="card-title">
           By Day

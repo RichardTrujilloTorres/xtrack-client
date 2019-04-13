@@ -278,10 +278,6 @@ export default {
       labelBullet.locationY = 0.5;
 
       return series;
-    },
-
-    logError(error) {
-      console.log(`-- Error: ${error}`)
     }
   }
 }

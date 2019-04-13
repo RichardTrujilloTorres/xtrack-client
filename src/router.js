@@ -8,6 +8,7 @@ import Create from '@/components/Expenses/Create'
 import Index from "./components/Expenses/Index";
 import {vueAuth} from "./main";
 import Login from "./components/Auth/Login";
+import Dashboard from "./components/Dashboard";
 
 Vue.use(Router)
 
@@ -65,10 +66,10 @@ const router = new Router({
       },
     {
       path: '/',
-      name: 'home',
-      component: Home,
+      name: 'dashboard',
+      component: Dashboard,
     meta: {
-        requiresAuth: false
+        requiresAuth: true
     }
     },
     {

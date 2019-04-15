@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Expense from "./api/expense";
 import {vueAuth} from "./main";
+import axios from 'axios';
 
 Vue.use(Vuex)
 
@@ -28,6 +29,22 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    getMonthlySummary(context) {
+        // TODO replace w/ resource
+      return axios.get('http://localhost:8000/api/stats/monthly-summary')
+    },
+    // TODO
+    getExpensesByCategory(context) {
+      /*
+        return this.state.resource.stats('by-category')
+            .then(res => {
+              context.commit('setExpense', res.data.data)
+            })
+            .catch(res => {
+              console.log(res)
+            })
+            */
+    },
     setUser(context, user) {
       context.commit('setUser', user)
     },

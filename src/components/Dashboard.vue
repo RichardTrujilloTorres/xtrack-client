@@ -2,6 +2,9 @@
   <div>
     <clip-loader :loading="isLoading" />
 
+    <!-- monthly summary -->
+    <monthly-summary />
+
     <!-- expenses by category -->
     <div
       v-show="!isLoading"
@@ -81,11 +84,13 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import animated from '@amcharts/amcharts4/themes/animated';
 
 import axios from 'axios';
+import MonthlySummary from "./MonthlySummary";
 
 
 export default {
   name: 'Dashboard',
   components: {
+    MonthlySummary,
     ClipLoader,
   },
   data() {

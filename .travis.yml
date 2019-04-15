@@ -1,0 +1,10 @@
+language: bash
+
+before_script:
+  - make clean
+  - make deps dev=yes
+  - make build dev=no
+  - rm -rf node_modules/
+
+script:
+  - make lint

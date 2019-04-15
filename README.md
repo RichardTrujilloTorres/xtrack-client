@@ -1,5 +1,7 @@
 # xTrack Client App
 
+[![Build Status](https://travis-ci.org/RichardTrujilloTorres/xtrack-client.svg?branch=master)](https://travis-ci.org/RichardTrujilloTorres/xtrack-client)
+
 # Intro
 A simple expenses tracker demo utility.
 

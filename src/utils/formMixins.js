@@ -20,18 +20,17 @@ let formMixins = {
         this.$i18n.t('status.success'),
         this.$i18n.t('operation.success'),
         'success'
-      )
+      );
 
-      this.$router.push('/')
+      this.$router.push('/');
     },
     onFailure(res) {
-      let message = this.$i18n.t('operation.error')
-      if (res.hasOwnProperty('message')) {
-        message = res.message
-      }
+      const message = res.hasOwnProperty('message')
+          ? res.message
+          : this.$i18n.t('operation.error');
 
-      this.$swal('Error', message, 'error')
-      console.log(res)
+      this.$swal('Error', message, 'error');
+      console.log(res);
     },
 
   }

@@ -18,7 +18,7 @@ import Vue from 'vue';
 Vue.component('actions', Actions)
 
 export default {
-  name: 'Dummy',
+  name: 'Index',
   components: {
     Actions,
     Datatable

@@ -135,7 +135,7 @@ import ClipLoader from 'vue-spinner/src/ClipLoader';
 
 
 export default {
-  name: 'Create',
+  name: 'Edit',
   components: {Multiselect, ClipLoader},
   mixins: [formMixins],
   data() {

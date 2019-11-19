@@ -5,7 +5,7 @@
         to="/"
         class="navbar-brand"
       >
-        {{ $t('app.home') }}
+          {{ appName }}
       </router-link>
       <button
         class="navbar-toggler"
@@ -200,6 +200,9 @@ export default {
     ...mapGetters(['getUser']),
     languages() {
       return LANGUAGES
+    },
+    appName() {
+      return process.env.VUE_APP_NAME;
     }
   },
   methods: {

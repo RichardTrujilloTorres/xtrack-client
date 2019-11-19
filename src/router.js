@@ -9,6 +9,7 @@ import Index from "./components/Expenses/Index";
 import {vueAuth} from "./main";
 import Login from "./components/Auth/Login";
 import Dashboard from "./components/Dashboard";
+import Search from "./views/Search";
 
 Vue.use(Router)
 
@@ -64,6 +65,14 @@ const router = new Router({
         requiresAuth: true
     }
     },
+      {
+          path: '/search',
+          name: 'search',
+          component: Search,
+          meta: {
+              requiresAuth: true
+          }
+      },
     {
       path: '/about',
       name: 'about',

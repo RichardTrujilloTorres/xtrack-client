@@ -170,12 +170,13 @@
           </li>
           -->
         </ul>
-        <form class="form-inline my-2 my-lg-0">
+        <form @submit.prevent="goToSearchPage" class="form-inline my-2 my-lg-0">
           <input
             class="form-control mr-sm-2"
             type="search"
             placeholder="..."
             :aria-label="$t('expenses.search')"
+            v-model="search"
           >
           <button
             class="btn btn-outline-success my-2 my-sm-0"
@@ -193,9 +194,14 @@
 import LANGUAGES from '../../i18/constants';
 import {vueAuth} from "../main";
 import {mapGetters} from 'vuex';
+import InstantSearch from "./InstantSearch";
 
 export default {
   name: 'Navbar',
+  components: {InstantSearch},
+  data: () => ({
+      search: ''
+  }),
   computed: {
     ...mapGetters(['getUser']),
     languages() {
@@ -206,6 +212,10 @@ export default {
     }
   },
   methods: {
+    goToSearchPage() {
+
+       this.$router.push(`/search?q=${this.search}`)
+    },
     isAuthenticated() {
       return vueAuth.isAuthenticated()
     },

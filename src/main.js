@@ -1,3 +1,7 @@
+
+// Require the polyfill before requiring any other modules.
+require('intersection-observer');
+
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -26,6 +30,13 @@ import {VueAuthenticate} from 'vue-authenticate';
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 
+import InstantSearch from 'vue-instantsearch'
+import VueObserveVisibility from 'vue-observe-visibility'
+
+
+// Instant search
+Vue.use(InstantSearch)
+Vue.use(VueObserveVisibility)
 
 
 

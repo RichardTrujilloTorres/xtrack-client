@@ -16,12 +16,10 @@
         />
       </h2>
 
-
-
       <template v-if="!searchIsEmpty">
         <ais-results
-          v-if="!searchIsEmpty"
-          :results-per-page="5"
+          v-if="!searchIsEmpty && searchStore.results.length > 0"
+          :results-per-page="10"
           :stack="true"
         >
           <template slot-scope="{ result }">
@@ -58,14 +56,19 @@
         <ais-no-results>Sorry, no expenses found</ais-no-results>
 
         <clip-loader
-          v-observe-visibility="{
-            callback: nextPage,
-            trottle: 1000
-          }"
-          :loading="isLoading"
+            :loading="isLoading"
         />
+
       </template>
     </ais-index>
+
+    <div
+      v-observe-visibility="{
+        callback: nextPage,
+        throttle: 300
+      }"
+    ></div>
+
   </div>
 </template>
 
@@ -87,11 +90,7 @@ export default {
 
   computed: {
     isLoading() {
-      if (this.searchStore.results.length) {
-        return true
-      }
-
-      return false
+      return this.searchStore.isSearchStalled;
     },
     searchIndex() {
       return process.env.VUE_APP_ALGOLIA_INDEX_NAME;
@@ -109,7 +108,7 @@ export default {
         return true
       }
 
-      return !(this.searchStore._helper.state.query.length > 0)
+      return !(this.searchStore._helper.state.query.length > 0);
     }
   },
   watch: {
@@ -140,14 +139,20 @@ export default {
       return `/expenses/${expense.id}/edit`;
     },
     nextPage(visible) {
-      if (visible) {
-        const params = this.searchStore.queryParameters
+        if (!visible || this.isLoading) {
+          return
+        }
+
+        const params = this.searchStore.queryParameters;
+        if (this.searchStore.totalPages === params.page) {
+            return;
+        }
+
         this.searchStore.queryParameters = Object.assign({}, params, {
           page: params.page + 1
-        })
+        });
 
         this.searchStore.refresh()
-      }
     },
     updateQuery(queryString) {
       const newUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?q=${queryString}`;

@@ -3,7 +3,7 @@
     <!-- expenses listing -->
     <datatable
       element-ref="expenses-datatable"
-      api-url="http://localhost:8000/api/expenses"
+      :api-url="datatableUrl"
       :fields="fields"
     />
   </div>
@@ -15,6 +15,8 @@ import Actions from '@/components/Expenses/Actions';
 import Vue from 'vue';
 
 
+const datatableUrl = `${process.env.VUE_APP_API_URL}/expenses`;
+
 Vue.component('actions', Actions)
 
 export default {
@@ -25,6 +27,7 @@ export default {
   },
   data() {
     return {
+      datatableUrl
     }
   },
   computed: {

@@ -30,6 +30,16 @@ class Resource {
     }
 
     /**
+     * Generic GET call.
+     *
+     * @param uri
+     * @returns {Promise<any>}
+     */
+    async get(uri = '') {
+        return await this.api.get(`${uri}`);
+    }
+
+    /**
      * Resource listing.
      *
      * @returns {Promise<AxiosPromise<any>>}

@@ -4,8 +4,11 @@
     class="monthly-summary"
   >
     <div class="card-group">
+
+
       <!-- highest category -->
       <div
+        v-if="summary.highestCategory"
         class="card"
         style="width: 18rem;"
       >
@@ -24,6 +27,7 @@
 
       <!-- highest single expense -->
       <div
+        v-if="summary.highestExpense"
         class="card"
         style="width: 18rem;"
       >

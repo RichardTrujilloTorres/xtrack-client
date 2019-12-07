@@ -30,6 +30,7 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import animated from '@amcharts/amcharts4/themes/animated';
 import Stats from "../../api/stats";
 import ClipLoader from 'vue-spinner/src/ClipLoader';
+import {voices} from "../../common/constants";
 
 export default {
   name: 'ByMonth',

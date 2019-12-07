@@ -86,7 +86,6 @@
 <script>
 
 import formMixins from '@/utils/formMixins';
-import {vueAuth} from "../../main";
 
 export default {
   name: 'Login',
@@ -111,17 +110,10 @@ export default {
         return
       }
 
-      console.log('login')
-      console.log(this.model.user)
-
-      vueAuth.login({
-        email: this.model.user.email,
-        password: this.model.user.password
+      this.$store.dispatch('login', {
+        user: this.model.user
       })
         .then(res => {
-          // this.setAuthInfo(res.data) // currently vueAuth is used to holds all required info
-          this.$store.dispatch('setUser', this.model.user)
-
           this.onSuccess(res)
         })
         .catch(res => {

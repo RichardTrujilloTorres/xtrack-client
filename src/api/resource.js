@@ -41,7 +41,7 @@ class Resource {
     /**
      * Retrieves the resource by its ID.
      *
-     * @param {integer} id
+     * @param {number} id
      * @returns {Promise<any>}
      */
     async show(id) {
@@ -61,7 +61,7 @@ class Resource {
     /**
      * Updates the specified resource.
      *
-     * @param {integer} id
+     * @param {number} id
      * @param {array|Object} data
      * @returns {Promise<any>}
      */
@@ -72,7 +72,7 @@ class Resource {
     /**
      * Removes the specified resource.
      *
-     * @param {integer} id
+     * @param {number} id
      * @returns {Promise<void>}
      */
     async delete(id) {

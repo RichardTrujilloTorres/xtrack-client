@@ -1,8 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
-import PageNotFound from './views/PageNotFound.vue'
-import Expense from '@/components/Expenses/Expense'
 import Edit from '@/components/Expenses/Edit'
 import Create from '@/components/Expenses/Create'
 import Index from "./components/Expenses/Index";
@@ -10,6 +7,7 @@ import {vueAuth} from "./main";
 import Login from "./components/Auth/Login";
 import Dashboard from "./components/Dashboard";
 import Search from "./views/Search";
+import PageNotFound from "./views/PageNotFound";
 
 Vue.use(Router)
 
@@ -45,14 +43,6 @@ const router = new Router({
           path: '/expenses/:id/edit',
           name: 'expenses-edit',
           component: Edit,
-          meta: {
-              requiresAuth: true
-          }
-      },
-      {
-          path: '/expenses/:id',
-          name: 'expenses-show',
-          component: Expense,
           meta: {
               requiresAuth: true
           }

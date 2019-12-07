@@ -57,13 +57,7 @@ export default new Vuex.Store({
       context.commit('setUser', user);
     },
     getExpense(context, id) {
-      return this.state.resource.show(id)
-        .then(res => {
-          context.commit('setExpense', res.data.data)
-        })
-        .catch(res => {
-          console.log(res)
-        })
+      return this.state.resource.show(id);
     },
     getExpenses({ commit }) {
       const expenses = this.state.expense.index()

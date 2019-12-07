@@ -5,6 +5,6 @@ import Resource from "./resource";
  *
  * @type {Resource}
  */
-const Expense = new Resource(`http://localhost:8000/api/expenses`)
+const Expense = new Resource(`${process.env.VUE_APP_API_URL}/expenses`)
 
 export default Expense

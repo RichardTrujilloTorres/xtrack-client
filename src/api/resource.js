@@ -55,7 +55,7 @@ class Resource {
      * @returns {Promise<any>}
      */
     async store(data) {
-        return await this.api.post('/', data)
+        return await this.api.post('', data)
     }
 
     /**

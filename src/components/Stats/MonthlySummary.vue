@@ -4,8 +4,6 @@
     class="monthly-summary"
   >
     <div class="card-group">
-
-
       <!-- highest category -->
       <div
         v-if="summary.highestCategory"
@@ -20,7 +18,7 @@
             {{ summary.highestCategory.category }}
           </h6>
           <p class="card-text">
-            {{ summary.highestCategory.total }}
+            {{ summary.highestCategory.total | euro }}
           </p>
         </div>
       </div>
@@ -36,7 +34,7 @@
             Highest Expense | This Month
           </h5>
           <h6 class="card-subtitle mb-2 text-muted">
-            {{ summary.highestExpense.category }} | {{ summary.highestExpense.denomination }}
+            {{ summary.highestExpense.category }} | {{ summary.highestExpense.denomination | euro }}
           </h6>
           <p class="card-text">
             {{ summary.highestExpense.description }}

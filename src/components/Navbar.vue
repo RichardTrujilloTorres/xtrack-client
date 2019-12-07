@@ -106,7 +106,7 @@
 
           <!-- user -->
           <li
-            v-show="isAuthenticated()"
+            v-if="isAuthenticated"
             class="nav-item dropdown"
           >
             <a
@@ -135,7 +135,7 @@
 
           <!-- guest user -->
           <li
-            v-show="!isAuthenticated()"
+            v-if="!isAuthenticated"
             class="nav-item dropdown"
           >
             <a
@@ -200,40 +200,33 @@ export default {
   name: 'Navbar',
   components: {InstantSearch},
   data: () => ({
-      search: ''
+      search: '',
   }),
   computed: {
-    ...mapGetters(['getUser']),
+    ...mapGetters(['getUser', 'isAuthenticated']),
     languages() {
       return LANGUAGES
     },
     appName() {
       return process.env.VUE_APP_NAME;
-    }
+    },
   },
   methods: {
     goToSearchPage() {
-
        this.$router.push(`/search?q=${this.search}`)
-    },
-    isAuthenticated() {
-      return vueAuth.isAuthenticated()
     },
     switchLanguage(language) {
       this.$i18n.locale = language
     },
-    logout() {
-      vueAuth.logout()
+    async logout() {
+      await this.$store.dispatch('logout');
+        this.$swal(
+            this.$i18n.t('status.success'),
+            this.$i18n.t('operation.logout.success'),
+            'success'
+        );
 
-      this.$swal(
-        this.$i18n.t('status.success'),
-        this.$i18n.t('operation.logout.success'),
-        'success'
-      )
-
-      this.$forceUpdate() // navbar not reflecting changes --force it
-
-      this.$router.push('/')
+    this.$router.push('/login')
     }
   }
 }

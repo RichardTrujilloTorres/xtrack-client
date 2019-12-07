@@ -140,7 +140,7 @@ export default {
   mixins: [formMixins],
   data() {
     return {
-      isLoading: true,
+      isLoading: false,
       resource: Expense,
       formstate: {},
       model: {
@@ -164,11 +164,16 @@ export default {
     }
   },
   mounted() {
+    this.isLoading = true;
     this.$store.dispatch('getExpense', this.id)
       .then(() => {
-        this.isLoading = false
+        this.isLoading = false;
         this.model = {...this.getExpense}
       })
+        .catch(res => {
+          this.isLoading = false;
+          this.onFailure(res)
+        });
   },
   methods: {
     submit() {

@@ -60,7 +60,6 @@ export default {
   created() {
     this.getMonthlySummary
       .then(res => {
-        console.log(res.data.data)
         this.summary = res.data.data
       })
       .catch(res => console.log(res))

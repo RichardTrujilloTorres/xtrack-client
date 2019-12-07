@@ -43,7 +43,7 @@ Vue.use(VueObserveVisibility)
 // Authentication
 Vue.use(VueAxios, axios)
 export const vueAuth = new VueAuthenticate(axios, {
-  baseUrl: 'http:/localhost:8000'
+  baseUrl: `${process.env.VUE_APP_LOGIN_URL}`
 })
 
 

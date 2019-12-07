@@ -83,8 +83,8 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import animated from '@amcharts/amcharts4/themes/animated';
 
-import axios from 'axios';
 import MonthlySummary from "./MonthlySummary";
+import Stats from "../api/stats";
 
 
 export default {
@@ -96,10 +96,9 @@ export default {
   data() {
     return {
       isLoading: true,
-      expense: Expense
+      expense: Expense,
+      stats: Stats
     }
-  },
-  computed: {
   },
   mounted() {
 
@@ -130,8 +129,7 @@ export default {
     byDay() {
       let chart = am4core.create("expensesByDate", am4charts.XYChart);
 
-      // TODO set resource
-      axios.get('http://localhost:8000/api/stats/by-day')
+      this.stats.get(`/by-day`)
         .then(res => {
           let data = res.data.data
 
@@ -170,8 +168,7 @@ export default {
       // Create chart instance
       let chart = am4core.create(this.$refs.expensesByCategory, am4charts.PieChart);
 
-      // TODO set resource
-      axios.get('http://localhost:8000/api/stats/by-category')
+      this.stats.get(`/by-category`)
         .then(res => {
           chart.data = res.data.data
 
@@ -231,8 +228,7 @@ export default {
       // Create chart instance
       let chart = am4core.create(this.$refs.expensesByMonth, am4charts.XYChart);
 
-      // TODO set resource to be consumed by the store
-      axios.get('http://localhost:8000/api/stats/by-month')
+      this.stats.get(`/by-month`)
         .then(res => {
           let data = res.data.data
 

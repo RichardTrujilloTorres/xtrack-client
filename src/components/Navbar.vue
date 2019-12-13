@@ -65,10 +65,10 @@
               </router-link>
 
               <div class="dropdown-divider" />
-              <a
+              <router-link
+                to="/"
                 class="dropdown-item"
-                href="#"
-              >{{ $t('expenses.statistics') }}</a>
+              >{{ $t('expenses.statistics') }}</router-link>
             </div>
           </li>
 

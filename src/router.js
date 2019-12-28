@@ -9,6 +9,7 @@ import Search from "./views/Search";
 import PageNotFound from "./views/PageNotFound";
 import store from "./store";
 import About from "./views/About";
+import UserService from "./services/user/user";
 
 Vue.use(Router)
 
@@ -88,11 +89,10 @@ router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
 
     // check local storage for credentials
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user.hasOwnProperty('email') && user.hasOwnProperty('password')) {
+    if (UserService.hasCredentials()) {
       store.dispatch('isLoading', true);
 
-      store.dispatch('login', {user})
+      store.dispatch('login', {user: UserService.getUser()})
         .then(res => {
           next();
         })

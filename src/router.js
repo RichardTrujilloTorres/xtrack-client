@@ -8,6 +8,7 @@ import Dashboard from "./components/Dashboard";
 import Search from "./views/Search";
 import PageNotFound from "./views/PageNotFound";
 import store from "./store";
+import About from "./views/About";
 
 Vue.use(Router)
 
@@ -15,99 +16,96 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-      {
-          path: '/login',
-          name: 'login',
-          component: Login,
-          meta: {
-              requiresAuth: false
-          }
-      },
-      {
-          path: '/expenses',
-          name: 'expenses',
-          component: Index,
-          meta: {
-              requiresAuth: true
-          }
-      },
-      {
-          path: '/expenses/create',
-          name: 'expenses-create',
-          component: Create,
-          meta: {
-              requiresAuth: true
-          }
-      },
-      {
-          path: '/expenses/:id/edit',
-          name: 'expenses-edit',
-          component: Edit,
-          meta: {
-              requiresAuth: true
-          }
-      },
-      {
-        path: '/',
-        name: 'dashboard',
-        component: Dashboard,
-        meta: {
-            requiresAuth: true
-        }
-      },
-      {
-          path: '/search',
-          name: 'search',
-          component: Search,
-          meta: {
-              requiresAuth: true
-          }
-      },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/expenses',
+      name: 'expenses',
+      component: Index,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/expenses/create',
+      name: 'expenses-create',
+      component: Create,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/expenses/:id/edit',
+      name: 'expenses-edit',
+      component: Edit,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/',
+      name: 'dashboard',
+      component: Dashboard,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: Search,
+      meta: {
+        requiresAuth: true
+      }
+    },
     {
       path: '/about',
       name: 'about',
-        meta: {
-            requiresAuth: false
-        },
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    },
-      {
-          path: '*',
-          name: '404',
-          component: PageNotFound,
-          meta: {
-              requiresAuth: false
-          }
+      meta: {
+        requiresAuth: false
       },
+      component: About,
+    },
+    {
+      path: '*',
+      name: '404',
+      component: PageNotFound,
+      meta: {
+        requiresAuth: false
+      }
+    },
   ]
 })
 
 // Auth route restriction
 router.beforeEach((to, from, next) => {
-    if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
+  if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
 
-        // check local storage for credentials
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user.hasOwnProperty('email') && user.hasOwnProperty('password')) {
-            store.dispatch('login', {user})
-                .then(res => {
-                    next();
-                })
-                .catch(res => {
-                    next('/login');
-                });
+    // check local storage for credentials
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user.hasOwnProperty('email') && user.hasOwnProperty('password')) {
+      store.dispatch('login', {user})
+        .then(res => {
+          next();
+        })
+        .catch(res => {
+          next('/login');
+        });
 
-            return;
-        }
-
-        next('/login');
-        return;
+      return;
     }
 
-    next();
+    next('/login');
+    return;
+  }
+
+  next();
 });
 
 export default router

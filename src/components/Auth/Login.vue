@@ -117,10 +117,8 @@ export default {
           this.onSuccess(res)
         })
         .catch(res => {
-          console.log(res)
           this.onFailure(res)
         })
-
     }
   }
 }

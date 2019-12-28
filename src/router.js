@@ -3,11 +3,11 @@ import Router from 'vue-router'
 import Edit from '@/components/Expenses/Edit'
 import Create from '@/components/Expenses/Create'
 import Index from "./components/Expenses/Index";
-import {vueAuth} from "./main";
 import Login from "./components/Auth/Login";
 import Dashboard from "./components/Dashboard";
 import Search from "./views/Search";
 import PageNotFound from "./views/PageNotFound";
+import store from "./store";
 
 Vue.use(Router)
 
@@ -47,14 +47,14 @@ const router = new Router({
               requiresAuth: true
           }
       },
-    {
-      path: '/',
-      name: 'dashboard',
-      component: Dashboard,
-    meta: {
-        requiresAuth: true
-    }
-    },
+      {
+        path: '/',
+        name: 'dashboard',
+        component: Dashboard,
+        meta: {
+            requiresAuth: true
+        }
+      },
       {
           path: '/search',
           name: 'search',

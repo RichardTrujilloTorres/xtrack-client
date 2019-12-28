@@ -87,13 +87,27 @@ const router = new Router({
 
 // Auth route restriction
 router.beforeEach((to, from, next) => {
-    if (to.meta.requiresAuth && !vueAuth.isAuthenticated()) {
-        next('/login')
+    if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
 
-        return
+        // check local storage for credentials
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user.hasOwnProperty('email') && user.hasOwnProperty('password')) {
+            store.dispatch('login', {user})
+                .then(res => {
+                    next();
+                })
+                .catch(res => {
+                    next('/login');
+                });
+
+            return;
+        }
+
+        next('/login');
+        return;
     }
 
-    next()
-})
+    next();
+});
 
 export default router

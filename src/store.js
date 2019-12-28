@@ -13,9 +13,8 @@ export default new Vuex.Store({
     expense: null,
     resource: Expense,
     stats: Stats,
-    user: {
-      email: ''
-    }
+    user: {},
+    isAuthenticated: false
   },
   mutations: {
     isAuthenticated(state, payload) {
@@ -44,11 +43,13 @@ export default new Vuex.Store({
             context.commit('setUser', payload.user);
       })
     },
-    async logout(context) {
-      await vueAuth.logout();
-      return context.commit('setUser', {
-        email: ''
+    logout(context) {
+      context.commit('isAuthenticated', {
+        isAuthenticated: false
       });
+      context.commit('setUser', {});
+
+      return vueAuth.logout();
     },
     getMonthlySummary(context) {
         return this.state.stats.get('/monthly-summary');
@@ -60,7 +61,7 @@ export default new Vuex.Store({
       return this.state.resource.show(id);
     },
     getExpenses({ commit }) {
-      const expenses = this.state.expense.index()
+      const expenses = this.state.expense.index();
       expenses.then(res => {
         commit('setExpenses', res.data.data)
       })
@@ -72,6 +73,6 @@ export default new Vuex.Store({
   getters: {
     getExpense: (state) => state.expense,
     getUser: (state) => state.user,
-    isAuthenticated: (state) => vueAuth.isAuthenticated()
+    isAuthenticated: (state) => state.isAuthenticated
   }
 })

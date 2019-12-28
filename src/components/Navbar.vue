@@ -218,15 +218,17 @@ export default {
     switchLanguage(language) {
       this.$i18n.locale = language
     },
-    async logout() {
-      await this.$store.dispatch('logout');
-        this.$swal(
-            this.$i18n.t('status.success'),
-            this.$i18n.t('operation.logout.success'),
-            'success'
-        );
+    logout() {
+      this.$store.dispatch('logout')
+          .then(res => {
+            this.$swal(
+                    this.$i18n.t('status.success'),
+                    this.$i18n.t('operation.logout.success'),
+                    'success'
+            );
 
-    this.$router.push('/login')
+            this.$router.push('/login')
+          });
     }
   }
 }

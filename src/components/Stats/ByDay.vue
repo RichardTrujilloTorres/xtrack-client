@@ -82,6 +82,7 @@ export default {
           this.buildUpChartData(res.data.data);
         })
         .catch(res => {
+          this.isLoading = false;
           console.log(res)
         })
     },

@@ -90,6 +90,8 @@ router.beforeEach((to, from, next) => {
     // check local storage for credentials
     const user = JSON.parse(localStorage.getItem('user'));
     if (user.hasOwnProperty('email') && user.hasOwnProperty('password')) {
+      store.dispatch('isLoading', true);
+
       store.dispatch('login', {user})
         .then(res => {
           next();
@@ -98,6 +100,9 @@ router.beforeEach((to, from, next) => {
           next('/login');
         });
 
+      setTimeout(() => {
+        store.dispatch('isLoading', false);
+      }, 1000);
       return;
     }
 

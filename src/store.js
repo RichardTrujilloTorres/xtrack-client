@@ -14,9 +14,15 @@ export default new Vuex.Store({
     resource: Expense,
     stats: Stats,
     user: {},
-    isAuthenticated: false
+    isAuthenticated: false,
+    app: {
+      loading: false
+    }
   },
   mutations: {
+    isLoading(state, payload) {
+        state.app.loading = payload;
+    },
     isAuthenticated(state, payload) {
       state.isAuthenticated = payload.isAuthenticated;
     },
@@ -35,6 +41,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    isLoading(context, payload) {
+        context.commit('isLoading', payload);
+    },
     login(context, payload) {
       return vueAuth.login(payload.user, payload.requestOptions)
           .then((res) => {
@@ -74,6 +83,7 @@ export default new Vuex.Store({
   getters: {
     getExpense: (state) => state.expense,
     getUser: (state) => state.user,
-    isAuthenticated: (state) => state.isAuthenticated
+    isAuthenticated: (state) => state.isAuthenticated,
+    isLoading: (state) => state.app.loading,
   }
 })

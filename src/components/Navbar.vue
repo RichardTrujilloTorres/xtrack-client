@@ -64,7 +64,7 @@
                 {{ $t('expenses.create') }}
               </router-link>
 
-              <div class="dropdown-divider" />
+              <div class="dropdown-divider"></div>
               <router-link
                 to="/"
                 class="dropdown-item"

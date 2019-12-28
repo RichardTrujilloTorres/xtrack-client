@@ -23,8 +23,9 @@ export default new Vuex.Store({
     removeUser(state) {
       state.user = null;
     },
-    setUser(state, {email}) {
-      state.user.email = email;
+    setUser(state, user) {
+      localStorage.setItem('user', JSON.stringify(user));
+      state.user = {email: user.email};
     },
     setExpense(state, expense) {
       state.expense = expense

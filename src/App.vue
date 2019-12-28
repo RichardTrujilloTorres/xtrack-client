@@ -5,8 +5,8 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-12">
-          <router-view v-if="!isLoading"/>
-          <clip-loader v-if="isLoading"></clip-loader>
+          <router-view v-if="!isLoading" />
+          <clip-loader v-if="isLoading" />
         </div>
       </div>
     </div>

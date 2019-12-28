@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import Expense from "./api/expense";
 import {vueAuth} from "./main";
 import Stats from "./api/stats";
+import UserService from "./services/user/user";
 
 Vue.use(Vuex)
 
@@ -30,7 +31,7 @@ export default new Vuex.Store({
       state.user = null;
     },
     setUser(state, user) {
-      localStorage.setItem('user', JSON.stringify(user));
+      UserService.setUser(user);
       state.user = {email: user.email};
     },
     setExpense(state, expense) {

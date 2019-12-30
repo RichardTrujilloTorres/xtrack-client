@@ -130,8 +130,9 @@
 import formMixins from "../../utils/formMixins";
 import Expense from '@/api/expense'
 import Multiselect from 'vue-multiselect';
-import {mapGetters} from 'vuex';
 import ClipLoader from 'vue-spinner/src/ClipLoader';
+import {mapActions} from "vuex";
+import {ACTIONS} from "../../store";
 
 
 export default {
@@ -158,7 +159,6 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getExpense']),
     id() {
       return this.$route.params.id
     }
@@ -166,9 +166,9 @@ export default {
   mounted() {
     this.isLoading = true;
     this.$store.dispatch('getExpense', this.id)
-      .then(() => {
+      .then((res) => {
         this.isLoading = false;
-        this.model = {...this.getExpense}
+        this.model = {...res.data.data};
       })
         .catch(res => {
           this.isLoading = false;
@@ -187,6 +187,9 @@ export default {
         .catch(res => this.onFailure(res))
     }
   },
+  ...mapActions({
+    getExpense: ACTIONS.EXPENSE.GET
+  })
 }
 </script>
 <style>

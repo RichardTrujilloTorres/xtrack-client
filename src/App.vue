@@ -19,11 +19,14 @@
 import Navbar from "./components/Navbar";
 import {mapGetters} from "vuex";
 import ClipLoader from "vue-spinner/src/ClipLoader";
+import {GETTERS} from "./store";
 
 export default {
   components: {ClipLoader, Navbar},
   computed: {
-    ...mapGetters(['isLoading'])
+    ...mapGetters({
+      isLoading: GETTERS.APP.IS_LOADING
+    })
   }
 }
 </script>

@@ -7,7 +7,7 @@ import Login from "./components/Auth/Login";
 import Dashboard from "./components/Dashboard";
 import Search from "./views/Search";
 import PageNotFound from "./views/PageNotFound";
-import store from "./store";
+import store, {ACTIONS, GETTERS} from "./store";
 import About from "./views/About";
 import UserService from "./services/user/user";
 
@@ -86,13 +86,13 @@ const router = new Router({
 
 // Auth route restriction
 router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
+  if (to.meta.requiresAuth && !store.getters[GETTERS.USER.IS_AUTHENTICATED]) {
 
-    // check local storage for credentials
+    // log the user automatically if the credentials exists
     if (UserService.hasCredentials()) {
-      store.dispatch('isLoading', true);
+      store.dispatch(ACTIONS.APP.IS_LOADING, true);
 
-      store.dispatch('login', {user: UserService.getUser()})
+      store.dispatch(ACTIONS.USER.LOGIN, {user: UserService.getUser()})
         .then(res => {
           next();
         })
@@ -101,7 +101,7 @@ router.beforeEach((to, from, next) => {
         });
 
       setTimeout(() => {
-        store.dispatch('isLoading', false);
+        store.dispatch(ACTIONS.APP.IS_LOADING, false);
       }, 1000);
       return;
     }

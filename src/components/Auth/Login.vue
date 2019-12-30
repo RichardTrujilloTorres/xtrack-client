@@ -86,6 +86,7 @@
 <script>
 
 import formMixins from '@/utils/formMixins';
+import {ACTIONS} from "../../store";
 
 export default {
   name: 'Login',
@@ -110,7 +111,7 @@ export default {
         return
       }
 
-      this.$store.dispatch('login', {
+      this.$store.dispatch(ACTIONS.USER.LOGIN, {
         user: this.model.user
       })
         .then(res => {

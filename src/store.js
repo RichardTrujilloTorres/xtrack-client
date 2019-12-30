@@ -7,6 +7,49 @@ import UserService from "./services/user/user";
 
 Vue.use(Vuex)
 
+export const GETTERS = {
+  APP: {
+    IS_LOADING: 'isLoading'
+  },
+  USER: {
+    GET: 'getUser',
+    IS_AUTHENTICATED: 'isAuthenticated'
+  },
+};
+export const ACTIONS = {
+  APP: {
+    IS_LOADING: 'isLoading'
+  },
+  USER: {
+    IS_AUTHENTICATED: 'isAuthenticated',
+    LOGIN: 'login',
+    LOGOUT: 'logout',
+  },
+  STATS: {
+    MONTHLY_SUMMARY: 'getMonthlySummary'
+  },
+  EXPENSE: {
+    GET: 'getExpense'
+  },
+  EXPENSES: {
+    GET: 'getExpenses'
+  },
+};
+export const MUTATIONS = {
+  APP: {
+    IS_LOADING: 'isLoading'
+  },
+  USER: {
+    SET: 'setUser',
+    IS_AUTHENTICATED: 'isAuthenticated'
+  },
+  EXPENSE: {
+      SET: 'setExpense'
+  },
+  EXPENSES: {
+    SET: 'setExpenses'
+  }
+};
 
 export default new Vuex.Store({
   state: {
@@ -21,60 +64,54 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    isLoading(state, payload) {
+    [MUTATIONS.APP.IS_LOADING](state, payload) {
         state.app.loading = payload;
     },
-    isAuthenticated(state, payload) {
+    [MUTATIONS.USER.IS_AUTHENTICATED](state, payload) {
       state.isAuthenticated = payload.isAuthenticated;
     },
-    removeUser(state) {
-      state.user = null;
-    },
-    setUser(state, user) {
+    [MUTATIONS.USER.SET](state, user) {
       UserService.setUser(user);
       state.user = {email: user.email};
     },
-    setExpense(state, expense) {
+    [MUTATIONS.EXPENSE.SET](state, expense) {
       state.expense = expense
     },
-    setExpenses(state, expenses) {
+    [MUTATIONS.EXPENSES.SET](state, expenses) {
       state.expenses = expenses
     }
   },
   actions: {
-    isLoading(context, payload) {
-        context.commit('isLoading', payload);
+    [ACTIONS.APP.IS_LOADING](context, payload) {
+        context.commit(MUTATIONS.APP.IS_LOADING, payload);
     },
-    login(context, payload) {
+    [ACTIONS.USER.LOGIN](context, payload) {
       return vueAuth.login(payload.user, payload.requestOptions)
           .then((res) => {
-            context.commit('isAuthenticated', {
+            context.commit(MUTATIONS.USER.IS_AUTHENTICATED, {
               isAuthenticated: vueAuth.isAuthenticated()
             });
-            context.commit('setUser', payload.user);
+            context.commit(MUTATIONS.USER.SET, payload.user);
       })
     },
-    logout(context) {
-      context.commit('isAuthenticated', {
+    [ACTIONS.USER.LOGOUT](context) {
+      context.commit(MUTATIONS.USER.IS_AUTHENTICATED, {
         isAuthenticated: false
       });
-      context.commit('setUser', {});
+      context.commit(MUTATIONS.USER.SET, {});
 
       return vueAuth.logout();
     },
-    getMonthlySummary(context) {
+    [ACTIONS.STATS.MONTHLY_SUMMARY](context) {
         return this.state.stats.get('/monthly-summary');
     },
-    setUser(context, user) {
-      context.commit('setUser', user);
-    },
-    getExpense(context, id) {
+    [ACTIONS.EXPENSE.GET](context, id) {
       return this.state.resource.show(id);
     },
-    getExpenses({ commit }) {
+    [ACTIONS.EXPENSES.GET]({ commit }) {
       const expenses = this.state.expense.index();
       expenses.then(res => {
-        commit('setExpenses', res.data.data)
+        commit([MUTATIONS.EXPENSES.SET], res.data.data)
       })
       .catch(res => {
         console.log(res)
@@ -82,9 +119,8 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    getExpense: (state) => state.expense,
-    getUser: (state) => state.user,
-    isAuthenticated: (state) => state.isAuthenticated,
-    isLoading: (state) => state.app.loading,
+    [GETTERS.USER.GET]: (state) => state.user,
+    [GETTERS.USER.IS_AUTHENTICATED]: (state) => state.isAuthenticated,
+    [GETTERS.APP.IS_LOADING]: (state) => state.app.loading,
   }
 })

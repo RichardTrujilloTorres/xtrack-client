@@ -47,20 +47,23 @@
 
 <script>
 import {mapActions} from 'vuex';
+import {ACTIONS} from "../../store";
 export default {
   name: 'MonthlySummary',
   data: () => ({
     summary: null
   }),
-  computed: {
-    ...mapActions(['getMonthlySummary'])
-  },
   created() {
-    this.getMonthlySummary
+    this.getMonthlySummary()
       .then(res => {
         this.summary = res.data.data
       })
       .catch(res => console.log(res))
+  },
+  methods: {
+    ...mapActions({
+      getMonthlySummary: ACTIONS.STATS.MONTHLY_SUMMARY
+    }),
   }
 }
 </script>

@@ -5,7 +5,7 @@
         to="/"
         class="navbar-brand"
       >
-          {{ appName }}
+        {{ appName }}
       </router-link>
       <button
         class="navbar-toggler"
@@ -64,11 +64,13 @@
                 {{ $t('expenses.create') }}
               </router-link>
 
-              <div class="dropdown-divider"></div>
+              <div class="dropdown-divider" />
               <router-link
                 to="/"
                 class="dropdown-item"
-              >{{ $t('expenses.statistics') }}</router-link>
+              >
+                {{ $t('expenses.statistics') }}
+              </router-link>
             </div>
           </li>
 
@@ -196,18 +198,19 @@
 
 <script>
 import LANGUAGES from '../../i18/constants';
-import {vueAuth} from "../main";
-import {mapGetters} from 'vuex';
-import InstantSearch from "./InstantSearch";
+import {ACTIONS, GETTERS} from "../store";
+import {mapGetters} from "vuex";
 
 export default {
   name: 'Navbar',
-  components: {InstantSearch},
   data: () => ({
-      search: '',
+    search: '',
   }),
   computed: {
-    ...mapGetters(['getUser', 'isAuthenticated']),
+    ...mapGetters({
+      getUser: GETTERS.USER.GET,
+      isAuthenticated: GETTERS.USER.IS_AUTHENTICATED
+    }),
     languages() {
       return LANGUAGES
     },
@@ -217,22 +220,22 @@ export default {
   },
   methods: {
     goToSearchPage() {
-       this.$router.push(`/search?q=${this.search}`)
+      this.$router.push(`/search?q=${this.search}`)
     },
     switchLanguage(language) {
       this.$i18n.locale = language
     },
     logout() {
-      this.$store.dispatch('logout')
-          .then(res => {
-            this.$swal(
-                    this.$i18n.t('status.success'),
-                    this.$i18n.t('operation.logout.success'),
-                    'success'
-            );
+      this.$store.dispatch(ACTIONS.USER.LOGOUT)
+        .then(res => {
+          this.$swal(
+            this.$i18n.t('status.success'),
+            this.$i18n.t('operation.logout.success'),
+            'success'
+          );
 
-            this.$router.push('/login')
-          });
+          this.$router.push('/login')
+        });
     }
   }
 }

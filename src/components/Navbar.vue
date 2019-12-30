@@ -97,14 +97,22 @@
                 href="#"
                 @click="switchLanguage(languages.EN)"
               >{{ $t('language.english') }}
-                <img class="flag" src="../assets/images/flags/united_kingdom.png" alt="en"/>
+                <img
+                  class="flag"
+                  src="../assets/images/flags/united_kingdom.png"
+                  alt="en"
+                >
               </a>
               <a
                 class="dropdown-item"
                 href="#"
                 @click="switchLanguage(languages.IT)"
               >{{ $t('language.italian') }}
-                <img class="flag" src="../assets/images/flags/italy.png" alt="it-IT"/>
+                <img
+                  class="flag"
+                  src="../assets/images/flags/italy.png"
+                  alt="it-IT"
+                >
               </a>
             </div>
           </li>
@@ -176,13 +184,16 @@
           </li>
           -->
         </ul>
-        <form @submit.prevent="goToSearchPage" class="form-inline my-2 my-lg-0">
+        <form
+          class="form-inline my-2 my-lg-0"
+          @submit.prevent="goToSearchPage"
+        >
           <input
+            v-model="search"
             class="form-control mr-sm-2"
             type="search"
             placeholder="..."
             :aria-label="$t('expenses.search')"
-            v-model="search"
           >
           <button
             class="btn btn-outline-success my-2 my-sm-0"

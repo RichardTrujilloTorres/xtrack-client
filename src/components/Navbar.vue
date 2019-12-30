@@ -94,12 +94,16 @@
                 class="dropdown-item"
                 href="#"
                 @click="switchLanguage(languages.EN)"
-              >{{ $t('language.english') }}</a>
+              >{{ $t('language.english') }}
+                <img class="flag" src="../assets/images/flags/united_kingdom.png" alt="en"/>
+              </a>
               <a
                 class="dropdown-item"
                 href="#"
                 @click="switchLanguage(languages.IT)"
-              >{{ $t('language.italian') }}</a>
+              >{{ $t('language.italian') }}
+                <img class="flag" src="../assets/images/flags/italy.png" alt="it-IT"/>
+              </a>
             </div>
           </li>
 
@@ -233,4 +237,10 @@ export default {
   }
 }
 </script>
+<style>
+  .flag {
+    width: 20px;
+    height: 20px;
+  }
+</style>
 

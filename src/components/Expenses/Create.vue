@@ -2,7 +2,7 @@
   <div>
     <div class="card">
       <vue-form
-        :state="formstate"
+        :state="formState"
         @submit.prevent="submit"
       >
         <div class="card-header">
@@ -137,7 +137,7 @@ export default {
     return {
       expenseService: Expense,
       categoriesService: Category,
-      formstate: {},
+      formState: {},
       model: {
         denomination: '',
         description: '...',
@@ -154,7 +154,7 @@ export default {
   },
   methods: {
     submit() {
-      if (this.formstate.$invalid) {
+      if (this.formState.$invalid) {
         this.$swal('Error', this.$i18n.t('form.toCorrect'), 'error')
         return
       }

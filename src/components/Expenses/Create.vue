@@ -80,6 +80,7 @@
                 <multiselect
                         multi-select-validator
                         name="category"
+                        label="name"
                         v-model="model.category"
                          :options="categories"
                          :searchable="false"
@@ -126,15 +127,23 @@
 import formMixins from "../../utils/formMixins";
 import Expense from '@/api/expense'
 import Multiselect from 'vue-multiselect';
+import Category from "../../api/category";
 
 
 export default {
   name: 'Create',
   components: {Multiselect},
   mixins: [formMixins],
+    created() {
+    this.categoriesService.get()
+        .then(res => this.categories = res.data.data)
+        .catch(res => console.log(res));
+
+    },
   data() {
     return {
-      resource: Expense,
+      expenseService: Expense,
+      categoriesService: Category,
       formstate: {},
       model: {
         denomination: '',
@@ -142,12 +151,7 @@ export default {
         category: null
       },
       // TODO BE based
-      categories: [
-        'groceries',
-        'medicines',
-        'transportation',
-        'other'
-      ],
+      categories: [],
     }
   },
   methods: {
@@ -157,7 +161,7 @@ export default {
         return
       }
 
-      this.resource.store(this.model)
+      this.expenseService.store(this.model)
         .then(res => this.onSuccess(res))
         .catch(res => this.onFailure(res))
     }

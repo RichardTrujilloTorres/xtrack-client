@@ -67,9 +67,9 @@ export default {
     },
     buildUpChartData(data) {
       this.chart.data = data.map(({total, category}) => ({
-          total,
-          category: getValueFromStringOrJSON(category, 'name')
-        }));
+        total,
+        category: getValueFromStringOrJSON(category, 'name')
+      }));
 
 
       // Add and configure Series

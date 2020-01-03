@@ -73,29 +73,28 @@
           <div class="form-row">
             <div class="col-md-4 mb-3">
               <validate
-                      tag="label"
-                      class="form-group required-field"
+                tag="label"
+                class="form-group required-field"
               >
                 <label class="type__label">{{ $t('expenses.category') }}</label>
                 <multiselect
-                        multi-select-validator
-                        name="category"
-                        label="name"
-                        v-model="model.category"
-                         :options="categories"
-                         :searchable="false"
-                         :close-on-select="true"
-                         :show-labels="true"
-                         :placeholder="$t('requests.select', { selection: 'category' })"
-                        :deselectLabel="''"
-                        :selectedLabel="''"
-                        required
-                >
-                </multiselect>
+                  v-model="model.category"
+                  multi-select-validator
+                  name="category"
+                  label="name"
+                  :options="categories"
+                  :searchable="false"
+                  :close-on-select="true"
+                  :show-labels="true"
+                  :placeholder="$t('requests.select', { selection: 'category' })"
+                  :deselect-label="''"
+                  :selected-label="''"
+                  required
+                />
 
                 <field-messages
-                        show="$touched || $submitted"
-                        class="form-control-feedback"
+                  show="$touched || $submitted"
+                  class="form-control-feedback"
                 >
                   <div slot="required">
                     {{ $t('fields.required') }}
@@ -134,12 +133,6 @@ export default {
   name: 'Create',
   components: {Multiselect},
   mixins: [formMixins],
-    created() {
-    this.categoriesService.get()
-        .then(res => this.categories = res.data.data)
-        .catch(res => console.log(res));
-
-    },
   data() {
     return {
       expenseService: Expense,
@@ -152,6 +145,12 @@ export default {
       },
       categories: [],
     }
+  },
+  created() {
+    this.categoriesService.get()
+      .then(res => this.categories = res.data.data)
+      .catch(res => console.log(res));
+
   },
   methods: {
     submit() {

@@ -3,7 +3,7 @@
     <!-- login -->
     <div class="card">
       <vue-form
-        :state="formstate"
+        :state="formState"
         @submit.prevent="submit"
       >
         <div class="card-header">
@@ -95,7 +95,7 @@ export default {
   mixins: [formMixins],
   data() {
     return {
-      formstate: {},
+      formState: {},
       model: {
         user: {
           email: '',
@@ -106,7 +106,7 @@ export default {
   },
   methods: {
     submit() {
-      if (this.formstate.$invalid) {
+      if (this.formState.$invalid) {
         this.$swal('Error', this.$i18n.t('form.toCorrect'), 'error')
         return
       }

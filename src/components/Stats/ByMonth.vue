@@ -31,6 +31,7 @@ import animated from '@amcharts/amcharts4/themes/animated';
 import Stats from "../../api/stats";
 import ClipLoader from 'vue-spinner/src/ClipLoader';
 import {voices} from "../../common/constants";
+import {getValueFromStringOrJSON} from "../../utils/str";
 
 export default {
   name: 'ByMonth',
@@ -85,6 +86,7 @@ export default {
       let results = []
 
       data.map(({category, month, total}) => {
+        category = getValueFromStringOrJSON(category, 'name');
         let result = {}
         let exists = results.filter(result => result.month === month)
 
@@ -108,8 +110,7 @@ export default {
       // set up month name
       results.map(result => {
         result.month = this.$i18n.t(`months.${result.month}`)
-      })
-
+      });
 
       this.chart.data = results;
     },

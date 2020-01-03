@@ -150,7 +150,6 @@ export default {
         description: '...',
         category: null
       },
-      // TODO BE based
       categories: [],
     }
   },

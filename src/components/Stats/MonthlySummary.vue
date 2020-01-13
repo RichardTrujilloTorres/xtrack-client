@@ -18,7 +18,7 @@
             {{ summary.highestCategory.category }}
           </h6>
           <p class="card-text">
-            {{ summary.highestCategory.total | euro }}
+            {{ summary.highestCategory.total | round | euro }}
           </p>
         </div>
       </div>
@@ -34,7 +34,7 @@
             Highest Expense | This Month
           </h5>
           <h6 class="card-subtitle mb-2 text-muted">
-            {{ summary.highestExpense.category }} | {{ summary.highestExpense.denomination | euro }}
+            {{ summary.highestExpense.category }} | {{ summary.highestExpense.denomination | round | euro }}
           </h6>
           <p class="card-text">
             {{ summary.highestExpense.description }}

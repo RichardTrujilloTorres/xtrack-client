@@ -103,7 +103,7 @@ export default {
       let results = []
 
       data.map(({category, month, total}) => {
-        category = category ? category.name : NO_CATEGORY;
+        category = category ? category.name : CATEGORY.DEFAULT;
         let result = {}
         let exists = results.filter(result => result.month === month)
 

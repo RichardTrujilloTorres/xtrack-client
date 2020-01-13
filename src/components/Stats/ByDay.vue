@@ -91,8 +91,12 @@ export default {
 
       data.map(result => {
         let date = new Date(result.day);
+        let dateExists = days.find(single => (new Date(single.day)).getTime() === date.getTime())
 
-        // TODO set this according to locale
+        if (dateExists) {
+          return days[days.indexOf(dateExists)].total += result.total
+        }
+
         days.push({
           day: date,
           total: result.total

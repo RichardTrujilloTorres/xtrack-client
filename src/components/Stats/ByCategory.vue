@@ -32,7 +32,7 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import animated from '@amcharts/amcharts4/themes/animated';
 import Stats from "../../api/stats";
 import ClipLoader from 'vue-spinner/src/ClipLoader';
-import {getValueFromStringOrJSON} from "../../utils/str";
+import {CATEGORY} from "../../common/constants";
 
 export default {
   name: 'ByCategory',
@@ -68,9 +68,8 @@ export default {
     buildUpChartData(data) {
       this.chart.data = data.map(({total, category}) => ({
         total,
-        category: getValueFromStringOrJSON(category, 'name')
+        category: category ? category.name : CATEGORY.DEFAULT
       }));
-
 
       // Add and configure Series
       let pieSeries = this.chart.series.push(new am4charts.PieSeries());

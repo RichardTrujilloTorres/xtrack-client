@@ -30,8 +30,9 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import animated from '@amcharts/amcharts4/themes/animated';
 import Stats from "../../api/stats";
 import ClipLoader from 'vue-spinner/src/ClipLoader';
-import {voices} from "../../common/constants";
-import {getValueFromStringOrJSON} from "../../utils/str";
+import {CATEGORY} from "../../common/constants";
+import Category from "../../api/category";
+import {capitalize} from "../../utils/str";
 
 export default {
   name: 'ByMonth',
@@ -41,8 +42,18 @@ export default {
   data: () => ({
     isLoading: true,
     stats: Stats,
-    chart: null
+    chart: null,
+    categoriesService: Category,
+    categories: [],
   }),
+  created() {
+    this.categoriesService.get()
+      .then(res => {
+        this.categories = res.data.data
+        this.buildSeries();
+      })
+      .catch(res => console.log(res));
+  },
   mounted() {
     am4core.useTheme(animated);
 
@@ -58,16 +69,22 @@ export default {
     valueAxis.renderer.inside = true;
     valueAxis.renderer.labels.template.disabled = true;
     valueAxis.min = 0;
-
-    this.createSeries(this.chart, voices.GROCERIES.key, voices.GROCERIES.value);
-    this.createSeries(this.chart, voices.OTHER.key, voices.OTHER.value);
-
-    // Legend
-    this.chart.legend = new am4charts.Legend();
-
-    this.loadChartData();
   },
   methods: {
+    buildSeries() {
+      this.categories.forEach(category => {
+        const name = category
+          ? category.name
+          : CATEGORY.DEFAULT;
+
+        this.createSeries(this.chart, name, capitalize(name));
+      });
+
+      // Legend
+      this.chart.legend = new am4charts.Legend();
+
+      this.loadChartData();
+    },
     loadChartData() {
       this.isLoading = true;
 
@@ -86,7 +103,7 @@ export default {
       let results = []
 
       data.map(({category, month, total}) => {
-        category = getValueFromStringOrJSON(category, 'name');
+        category = category ? category.name : NO_CATEGORY;
         let result = {}
         let exists = results.filter(result => result.month === month)
 
@@ -102,7 +119,7 @@ export default {
           return
         }
 
-        result[category] = total
+        result[category] = Number((total).toFixed(2));
         result.month = month
         results.push(result)
       })

@@ -86,6 +86,7 @@
                   v-model="model.category"
                   multi-select-validator
                   name="category"
+                  label="name"
                   :options="categories"
                   :searchable="false"
                   :close-on-select="true"
@@ -133,6 +134,7 @@ import Multiselect from 'vue-multiselect';
 import ClipLoader from 'vue-spinner/src/ClipLoader';
 import {mapActions} from "vuex";
 import {ACTIONS} from "../../store";
+import Category from "../../api/category";
 
 
 export default {
@@ -149,19 +151,21 @@ export default {
         description: '...',
         category: null
       },
-      // TODO BE based
-      categories: [
-        'groceries',
-        'medicines',
-        'transportation',
-        'other'
-      ],
+      categoriesService: Category,
+      categories: [],
     }
   },
   computed: {
     id() {
       return this.$route.params.id
     }
+  },
+  created() {
+    this.categoriesService.get()
+      .then(res => {
+        this.categories = res.data.data
+      })
+      .catch(res => console.log(res));
   },
   mounted() {
     this.isLoading = true;
@@ -170,10 +174,10 @@ export default {
         this.isLoading = false;
         this.model = {...res.data.data};
       })
-        .catch(res => {
-          this.isLoading = false;
-          this.onFailure(res)
-        });
+      .catch(res => {
+        this.isLoading = false;
+        this.onFailure(res)
+      });
   },
   methods: {
     submit() {

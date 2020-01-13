@@ -47,7 +47,12 @@ export default {
         {
           name: 'category',
           title: "Category", // TODO update fields to support internationalization
-          sortField: 'category'
+          sortField: 'category.slug',
+          callback: (value) => {
+            return value
+              ? value.name
+              : '';
+          }
         },
         {
           name: '__component:actions',
